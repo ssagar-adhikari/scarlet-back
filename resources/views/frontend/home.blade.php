@@ -346,7 +346,7 @@
                                                                     alt="Image">
                                                                 <div class="text-wrap text-center">
                                                                     <h5 class="heading"><a
-                                                                            href="#">{{ $portfolio->title }}</a>
+                                                                            href="{{route('frontend.portfolios.details', $portfolio->slug)}}">{{ $portfolio->title }}</a>
                                                                     </h5>
                                                                     {{-- <div class="elm-meta">
                                                                         <span><a href="#">Architecture</a></span>
@@ -355,7 +355,7 @@
                                                                 </div>
                                                                 <div class="elm-link">
                                                                     {{-- <a href="#" class="icon-1 icon-search"></a> --}}
-                                                                    <a href="" class="icon-1"></a>
+                                                                    <a href="{{route('frontend.portfolios.details', $portfolio->slug)}}" class="icon-1"></a>
                                                                 </div>
                                                                 <div class="overlay-effect bg-color-3"></div>
                                                             </div>
