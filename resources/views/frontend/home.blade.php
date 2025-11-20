@@ -9,13 +9,13 @@
         }
 
         /* body {
-                                                                      font-family: 'Poppins', sans-serif;
-                                                                      margin: 0;
-                                                                      display: flex;
-                                                                      flex-wrap: wrap;
-                                                                      background-color: var(--light-bg);
-                                                                      color: var(--dark-text);
-                                                                    } */
+                                                                              font-family: 'Poppins', sans-serif;
+                                                                              margin: 0;
+                                                                              display: flex;
+                                                                              flex-wrap: wrap;
+                                                                              background-color: var(--light-bg);
+                                                                              color: var(--dark-text);
+                                                                            } */
 
         /* Left pane (desktop) / bottom (mobile) */
         .calculator {
@@ -270,17 +270,21 @@
                             <a id="home-price-calculator" class="anchor-link"></a>
 
                             <section class="calculator">
-                                <h2 class="heading">HOME PRICE CALCULATOR</h2>
-
-                                <div class="tabs">
+                                {{-- <h2 class="heading">HOME PRICE ESTIMATOR</h2> --}}
+                                <div class="tab active"><h5 class="heading mt-4">HOME PRICE ESTIMATOR </h5></div>
+                                {{-- <div class="tabs">
                                     <div class="tab active" data-tab="basic">Basic</div>
                                     <div class="tab" data-tab="advanced">Advanced</div>
-                                </div>
+                                </div> --}}
 
                                 <!-- Basic -->
                                 <div id="basic" class="tab-content active">
-                                    <label for="basic-size">Size (sqft)</label>
-                                    <input type="number" id="basic-size" placeholder="Enter home size">
+                                    <label for="basic-story">Story</label>
+                                    <select id="basic-story">
+                                        <option value="single">Single</option>
+                                        <option value="double">Double</option>
+
+                                    </select>
 
                                     <label for="basic-type">Type</label>
                                     <select id="basic-type">
@@ -289,45 +293,17 @@
                                         <option value="luxury">Luxury</option>
                                     </select>
 
+                                    <label for="basic-size">Size (sqm)</label>
+                                    <input type="number" id="basic-size" placeholder="Enter home size">
+
+
                                     <button class="calculate-btn" onclick="calculateBasic()">Calculate</button>
 
                                     <div class="result" id="basic-result">Estimated Price: $0</div>
                                 </div>
 
                                 <!-- Advanced -->
-                                <div id="advanced" class="tab-content">
-                                    <label for="adv-size">Size (sqft)</label>
-                                    <input type="number" id="adv-size" placeholder="Enter home size">
 
-                                    <label for="adv-type">Type</label>
-                                    <select id="adv-type">
-                                        <option value="standard">Standard</option>
-                                        <option value="premium">Premium</option>
-                                        <option value="luxury">Luxury</option>
-                                    </select>
-
-                                    <label for="adv-droppage">Droppage (%)</label>
-                                    <input type="number" id="adv-droppage" placeholder="Enter droppage %">
-
-                                    <label for="adv-void">Void Area (sqft)</label>
-                                    <input type="number" id="adv-void" placeholder="Enter void area">
-
-                                    <label for="adv-wall">Wall Type</label>
-                                    <select id="adv-wall">
-                                        <option value="brick">Brick</option>
-                                        <option value="drywall">Drywall</option>
-                                        <option value="hybrid">Hybrid</option>
-                                    </select>
-
-                                    <div class="toggle">
-                                        <input type="checkbox" id="adv-landscape">
-                                        <label for="adv-landscape">Include Landscape/Fence</label>
-                                    </div>
-
-                                    <button class="calculate-btn" onclick="calculateAdvanced()">Calculate</button>
-
-                                    <div class="result" id="adv-result">Estimated Price: $0</div>
-                                </div>
                             </section>
                         </div>
                         <div class="themesflat-spacer clearfix" data-desktop="60" data-mobile="60" data-smobile="60"
@@ -369,7 +345,8 @@
                                                                 <img src="{{ asset($portfolio->images[0]->image_path) }}"
                                                                     alt="Image">
                                                                 <div class="text-wrap text-center">
-                                                                    <h5 class="heading"><a href="#">{{ $portfolio->title }}</a>
+                                                                    <h5 class="heading"><a
+                                                                            href="#">{{ $portfolio->title }}</a>
                                                                     </h5>
                                                                     {{-- <div class="elm-meta">
                                                                         <span><a href="#">Architecture</a></span>
@@ -391,7 +368,8 @@
                                     <div class="themesflat-spacer clearfix" data-desktop="41" data-mobile="35"
                                         data-smobile="35"></div>
                                     <div class="elm-button text-center">
-                                        <a href="{{ route('frontend.portfolios') }}" class="themesflat-button
+                                        <a href="{{ route('frontend.portfolios') }}"
+                                            class="themesflat-button
                                                      bg-accent">ALL
                                             PROJECTS </a>
                                     </div>
@@ -433,26 +411,25 @@
                                     data-column2="2" data-column3="1" data-auto="true">
                                     <div class="owl-carousel owl-theme">
                                         @foreach ($services as $service)
-
-
                                             <div class="themesflat-image-box style-2 clearfix">
                                                 <div class="image-box-item">
                                                     <div class="inner">
                                                         <div class="thumb data-effect-item">
-                                                            <img src="{{asset($service->image)}}" alt="{{$service->title}}"
+                                                            <img src="{{ asset($service->image) }}"
+                                                                alt="{{ $service->title }}"
                                                                 style="height:250px; object-fit:cover; object-poistion:center;">
                                                             <div class="overlay-effect bg-color-accent"></div>
                                                         </div>
                                                         <div class="text-wrap">
                                                             <h5 class="heading"><a
-                                                                    href="{{route('frontend.services.details', $service->slug)}}">{{$service->title}}</a>
+                                                                    href="{{ route('frontend.services.details', $service->slug) }}">{{ $service->title }}</a>
                                                             </h5>
                                                             <p class="letter-spacing-01">
-                                                                {!!$service->short_description!!}
+                                                                {!! $service->short_description !!}
                                                             </p>
                                                             <div class="elm-readmore">
                                                                 <a
-                                                                    href="{{route('frontend.services.details', $service->slug)}}">DETAILS</a>
+                                                                    href="{{ route('frontend.services.details', $service->slug) }}">DETAILS</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -465,11 +442,14 @@
                                 </div>
 
                             </div>
-                            <div class="themesflat-spacer clearfix" data-desktop="41" data-mobile="35" data-smobile="35">
+                            <div class="themesflat-spacer clearfix" data-desktop="41" data-mobile="35"
+                                data-smobile="35">
                             </div>
                             <div class="elm-button text-center">
-                                <a href="{{ route('frontend.services') }}" class="themesflat-button
-                                                                                 bg-accent"> SEE MORE </a>
+                                <a href="{{ route('frontend.services') }}"
+                                    class="themesflat-button
+                                                                                 bg-accent">
+                                    SEE MORE </a>
                             </div>
 
                             <div class="row">
@@ -490,7 +470,8 @@
                                     <div class="themesflat-spacer clearfix" data-desktop="80" data-mobile="60"
                                         data-smobile="60"></div>
                                     <div class="themesflat-carousel-box has-arrows arrow-center arrow-circle offset-v-24 clearfix"
-                                        data-gap="30" data-column="1" data-column2="1" data-column3="1" data-auto="true">
+                                        data-gap="30" data-column="1" data-column2="1" data-column3="1"
+                                        data-auto="true">
                                         <div class="owl-carousel owl-theme">
                                             @foreach ($data['testimonials'] as $testimonial)
                                                 <div
@@ -572,19 +553,58 @@
         });
 
         // Basic calculation
+        // function calculateBasic() {
+        //     const size = parseFloat(document.getElementById('basic-size').value) || 0;
+        //     const type = document.getElementById('basic-type').value;
+
+        //     const rates = {
+        //         standard: 2000,
+        //         premium: 2200,
+        //         luxury: 220
+        //     };
+        //     const price = size * rates[type];
+
+        //     document.getElementById('basic-result').innerText = `Estimated Price: $${price.toLocaleString()}`;
+        // }
         function calculateBasic() {
-            const size = parseFloat(document.getElementById('basic-size').value) || 0;
+            const story = document.getElementById('basic-story').value;
             const type = document.getElementById('basic-type').value;
+            const size = parseFloat(document.getElementById('basic-size').value);
+            const resultBox = document.getElementById('basic-result');
 
-            const rates = {
-                standard: 120,
-                premium: 160,
-                luxury: 220
-            };
-            const price = size * rates[type];
+            if (isNaN(size) || size <= 0) {
+                resultBox.innerHTML = "Please enter a valid building area.";
+                return;
+            }
 
-            document.getElementById('basic-result').innerText = `Estimated Price: $${price.toLocaleString()}`;
+            let rate = 0;
+            let price = 0;
+
+            // Single Story
+            if (story === "single") {
+                if (type === "standard") rate = 2000;
+                else if (type === "premium") rate = 2200;
+                else if (type === "luxury") {
+                    resultBox.innerHTML = "Please contact us for Luxury pricing.";
+                    return;
+                }
+            }
+
+            // Double Story
+            if (story === "double") {
+                if (type === "standard") rate = 2200;
+                else if (type === "premium") rate = 2500;
+                else if (type === "luxury") {
+                    resultBox.innerHTML = "Please contact us for Luxury pricing.";
+                    return;
+                }
+            }
+
+            price = rate * size;
+
+            resultBox.innerHTML = `Estimated Price: $${price.toLocaleString()}`;
         }
+
 
         // Advanced calculation
         function calculateAdvanced() {
@@ -596,8 +616,8 @@
             const landscape = document.getElementById('adv-landscape').checked;
 
             const rates = {
-                standard: 120,
-                premium: 160,
+                standard: 2000,
+                premium: 2200,
                 luxury: 220
             };
             const wallAdjustment = wallType === 'brick' ? 1.0 : wallType === 'drywall' ? 0.9 : 1.1;
