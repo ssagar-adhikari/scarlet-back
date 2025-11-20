@@ -1,0 +1,5 @@
+@include('layouts.frontend.header')
+@yield('css')
+@yield('content')
+@include('layouts.frontend.footer')
+@yield('script')

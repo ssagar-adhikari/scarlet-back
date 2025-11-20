@@ -1,0 +1,73 @@
+.navbar .dropdown-menu>li form button {
+    display: block;
+    color: #8a909d;
+    font-size: 0.88rem;
+    padding: 0.625rem 1.25rem;
+}
+
+@media (min-width: 992px) {
+
+    .navbar .navbar-right .navbar-nav .user-menu {
+        min-width: auto !important;
+    }
+}
+
+
+hr.separator {
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+
+#sidebar .sidebar-footer-content {
+    padding-top: 0rem;
+    padding-bottom: 1rem;
+}
+
+
+.modal .modal-body input[type=checkbox] {
+    height: 1.48rem;
+}
+
+.app-brand a {
+    padding-left: 1.06rem !important;
+}
+
+.app-brand a img {
+    max-width: 170px !important;
+}
+
+
+
+#sidebar .app-brand {
+    background-color: inherit;
+}
+
+i.font-lg {
+    font-size: 40px;
+    color: #dc8229;
+}
+
+a.card-tab-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+div.dataTables_wrapper div.dataTables_length select {
+    min-width: 60px;
+}
+
+.sidebar-minified aside.left-sidebar.bg-sidebar .sidebar .app-brand a img {
+    max-width: 80px !important;
+}
+
+.sidebar-minified aside.left-sidebar.bg-sidebar .sidebar .app-brand a {
+    padding: 0 !important;
+}
+
+aside.left-sidebar.bg-sidebar:hover .sidebar .app-brand a img {
+    max-width: 170px !important;
+}
+
+.navbar .navbar-right .navbar-nav .user-menu .user-image {
+    width: 80px !important;
+}
