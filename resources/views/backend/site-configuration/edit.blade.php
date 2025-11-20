@@ -36,7 +36,7 @@
                 <label class="form-label">Instagram</label>
                 <input type="text" name="instagram" class="form-control mb-3" value="{{ old('instagram', $config->instagram) }}" required>
 
-                <label class="form-label">Pinterest</label>
+                <label class="form-label">Youtube</label>
                 <input type="text" name="pinterest" class="form-control mb-3" value="{{ old('pinterest', $config->pinterest) }}" required>
             </div>
 

@@ -43,7 +43,7 @@ class SiteConfigurationController extends Controller
             'instagram' => 'required|string|max:255',
             'pinterest' => 'required|string|max:255',
             'map' => 'required|string',
-            'logo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            // 'logo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $data = $request->except('logo');

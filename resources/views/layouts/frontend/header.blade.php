@@ -54,7 +54,7 @@
                                     <span class="icons">
                                         <a href="{{ $config->facebook }}"><i class="fa fa-facebook"></i></a>
                                         <a href="{{ $config->instagram }}"><i class="fa fa-instagram"></i></a>
-                                        <a href="{{ $config->pinterest }}"><i class="fa fa-pinterest-p"></i></a>
+                                        <a href="{{ $config->pinterest }}"><i class="fa fa-youtube"></i></a>
                                     </span>
                                 </div>
                             </div><!-- /.top-bar-socials -->
