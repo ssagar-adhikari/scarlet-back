@@ -68,6 +68,12 @@
                         <span class="nav-text">Blogs</span>
                     </a>
                 </li>
+                <li class="has-sub {{ $currentUrl == 'admin/gallery-categories' ? 'active' : '' }} ">
+                    <a class="sidenav-item-link" href="{{ route('admin.gallery-categories.index') }}">
+                        <i class="mdi mdi-view-dashboard-outline"></i>
+                        <span class="nav-text">Gallery Category</span>
+                    </a>
+                </li>
                 <li class="has-sub {{ $currentUrl == 'admin/gallery' ? 'active' : '' }} ">
                     <a class="sidenav-item-link" href="{{ route('admin.gallery.index') }}">
                         <i class="mdi mdi-view-dashboard-outline"></i>

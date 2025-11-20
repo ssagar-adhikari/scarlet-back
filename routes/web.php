@@ -1,26 +1,27 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Backend\BlogController;
-use App\Http\Controllers\Backend\StoryController;
-use App\Http\Controllers\Backend\ChooseController;
-use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\AboutUsController;
-use App\Http\Controllers\Backend\GalleryController;
-use App\Http\Controllers\Backend\ServiceController;
+use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\ChooseController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\GalleryCategoryController;
+use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\InquiryController;
 use App\Http\Controllers\Backend\PortfolioController;
-use App\Http\Controllers\Frontend\HomepageController;
-use App\Http\Controllers\Backend\TestimonialController;
+use App\Http\Controllers\Backend\ServiceController;
 use App\Http\Controllers\Backend\SiteConfigurationController;
+use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\StoryController;
+use App\Http\Controllers\Backend\TestimonialController;
+use App\Http\Controllers\Frontend\HomepageController;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
-require __DIR__ . '/backend.php';
+require __DIR__.'/backend.php';
 
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('auth.login');
@@ -128,6 +129,16 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
         'update' => 'slider.update',
         'destroy' => 'slider.destroy',
     ]);
+
+    Route::resource('gallery-categories', GalleryCategoryController::class)->names([
+        'index' => 'gallery-categories.index',
+        'create' => 'gallery-categories.create',
+        'store' => 'gallery-categories.store',
+        'show' => 'gallery-categories.show',
+        'edit' => 'gallery-categories.edit',
+        'update' => 'gallery-categories.update',
+        'destroy' => 'gallery-categories.destroy',
+    ]);
     Route::get('configuration', [SiteConfigurationController::class, 'edit'])->name('configuration.edit');
     Route::post('configuration', [SiteConfigurationController::class, 'update'])->name('configuration.update');
 
@@ -143,7 +154,7 @@ Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function () {
     Route::post('/profile', [AuthController::class, 'profileUpdate'])->name('profile.update');
 });
 
-//Frontend Route
+// Frontend Route
 Route::get('/', [HomepageController::class, 'home'])->name('frontend.home');
 Route::get('/about-us', [HomepageController::class, 'about'])->name('frontend.about');
 Route::get('/portfolios', [HomepageController::class, 'portfolio'])->name('frontend.portfolios');
@@ -156,7 +167,6 @@ Route::get('/gallery', [HomepageController::class, 'gallery'])->name('frontend.g
 Route::get('/contact-us', [HomepageController::class, 'contactUs'])->name('frontend.contact');
 Route::post('/contact-us', [HomepageController::class, 'storeContact'])->name('frontend.contact.store');
 
-
 Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
@@ -164,18 +174,20 @@ Route::get('/clear-cache', function () {
     Artisan::call('view:clear');
     Artisan::call('optimize:clear');
     Artisan::call('config:cache');
+
     return response()->json([
         'status' => 'success',
-        'message' => 'All caches cleared successfully!'
+        'message' => 'All caches cleared successfully!',
     ]);
 });
 
 Route::get('/migrate', function () {
     Artisan::call('migrate', ['--force' => true]);
+
     return 'Migrations executed successfully!';
 });
 
-Route::get('/debug-session', function() {
+Route::get('/debug-session', function () {
     return [
         'session_id' => session()->getId(),
         'csrf_token' => csrf_token(),
@@ -188,29 +200,29 @@ Route::get('/debug-session', function() {
     ];
 });
 
-Route::get('/test-session-persistence', function() {
+Route::get('/test-session-persistence', function () {
     // Set a test value in session
     session(['test_time' => now()->toString()]);
 
     return [
         'session_id' => session()->getId(),
         'test_time_set' => session('test_time'),
-        'message' => 'Now refresh this page and see if test_time_set stays the same'
+        'message' => 'Now refresh this page and see if test_time_set stays the same',
     ];
 });
 
-Route::get('/check-session-files', function() {
+Route::get('/check-session-files', function () {
     $sessionPath = storage_path('framework/sessions');
 
     // Try to write a test file
-    $testFile = $sessionPath . '/test_write_' . time() . '.txt';
+    $testFile = $sessionPath.'/test_write_'.time().'.txt';
     $writeSuccess = @file_put_contents($testFile, 'test');
 
     if ($writeSuccess) {
         @unlink($testFile); // Clean up
     }
 
-    $files = glob($sessionPath . '/*');
+    $files = glob($sessionPath.'/*');
 
     return [
         'session_path' => $sessionPath,
@@ -218,17 +230,17 @@ Route::get('/check-session-files', function() {
         'path_writable' => is_writable($sessionPath),
         'write_test' => $writeSuccess ? 'SUCCESS' : 'FAILED',
         'total_files' => count($files),
-        'recent_files' => array_slice(array_map(function($file) {
+        'recent_files' => array_slice(array_map(function ($file) {
             return [
                 'name' => basename($file),
                 'size' => filesize($file),
                 'modified' => date('Y-m-d H:i:s', filemtime($file)),
             ];
-        }, $files), -5)
+        }, $files), -5),
     ];
 });
 
-Route::get('/debug-laravel-cookie', function() {
+Route::get('/debug-laravel-cookie', function () {
     $sessionId = session()->getId();
     $cookieName = config('session.cookie');
 

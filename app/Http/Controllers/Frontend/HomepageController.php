@@ -13,6 +13,7 @@ use App\Models\Service;
 use App\Models\Portfolio;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use App\Models\GalleryCategory;
 use App\Http\Controllers\Controller;
 
 class HomepageController extends Controller
@@ -80,8 +81,9 @@ class HomepageController extends Controller
     }
     public function gallery()
     {
+        $categories = GalleryCategory::get();
         $gallery = Gallery::all();
-        return view('frontend.gallery', compact('gallery'));
+        return view('frontend.gallery', compact('gallery', 'categories'));
     }
 
     public function storeContact(Request $request)

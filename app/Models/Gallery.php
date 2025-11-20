@@ -10,6 +10,12 @@ class Gallery extends Model
 
     protected $fillable = [
         'sequence',
-        'image'
+        'image',
+        'gallery_category_id'
     ];
+
+    public function category()
+{
+    return $this->belongsTo(GalleryCategory::class, 'gallery_category_id');
+}
 }

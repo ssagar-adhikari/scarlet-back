@@ -7,7 +7,7 @@
                 <div id="breadcrumbs">
                     <div class="breadcrumbs-inner">
                         <div class="breadcrumb-trail">
-                            <a href="{{route('frontend.home')}}" class="trail-begin">Home</a>
+                            <a href="{{ route('frontend.home') }}" class="trail-begin">Home</a>
                             <span class="sep">|</span>
                             <span class="trail-end">Gallery</span>
                         </div>
@@ -33,14 +33,22 @@
 
                                         <div class="themesflat-spacer clearfix" data-desktop="30" data-mobile="20"
                                             data-smobile="20"></div>
-
-
+                                        <ul class="themesflat-filter style-1 clearfix">
+                                            <li><a href="#" data-filter="*">All</a></li>
+                                            @foreach ($categories as $category)
+                                                <li><a href="#"
+                                                        data-filter=".category-{{ $category->id }}">{{ $category->title }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        <div class="themesflat-spacer clearfix" data-desktop="40" data-mobile="35"
+                                            data-smobile="35"></div>
                                         <div class="themesflat-gallery gallery-grid" id="company-gallery">
                                             @foreach ($gallery as $g)
-                                            <div class="gallery-card">
-                                                <img src="{{asset($g->image)}}" alt="scarlet-gallery"
-                                                    data-full="{{asset($g->image)}}">
-                                            </div>
+                                                <div class="gallery-card category-{{ $g->gallery_category_id }}">
+                                                    <img src="{{ asset($g->image) }}" alt="scarlet-gallery"
+                                                        data-full="{{ asset($g->image) }}">
+                                                </div>
                                             @endforeach
                                         </div>
 
@@ -73,6 +81,36 @@
 
     <!-- GALLERY SCRIPT (also before footer) -->
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const filterLinks = document.querySelectorAll('.themesflat-filter a');
+            const items = document.querySelectorAll('#company-gallery .gallery-card');
+
+            filterLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const filter = this.getAttribute('data-filter');
+
+                    // remove active class
+                    filterLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+
+                    items.forEach(item => {
+                        if (filter === '*') {
+                            item.style.display = 'block';
+                        } else {
+                            if (item.classList.contains(filter.substring(1))) {
+                                item.style.display = 'block';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+
+        });
         (function() {
             // helper
             function qsAll(sel) {
