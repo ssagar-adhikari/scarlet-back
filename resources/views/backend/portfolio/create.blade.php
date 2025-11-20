@@ -91,6 +91,16 @@
                                 </option>
                             </select>
                         </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Show in Homepage</label>
+
+                            <!-- Always send 0 if unchecked -->
+                            <input type="hidden" name="show_in_homepage" value="0">
+
+                            <!-- Send 1 when checked -->
+                            <input type="checkbox" name="show_in_homepage" value="1"
+                                {{ old('show_in_homepage', 0) == 1 ? 'checked' : '' }}>
+                        </div>
                         <div class="col-md-12">
                             <label class="form-label fw-semibold">Upload Images</label>
                             <div id="image-wrapper" class="mb-2">

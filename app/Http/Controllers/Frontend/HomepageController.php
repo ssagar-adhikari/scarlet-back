@@ -20,7 +20,7 @@ class HomepageController extends Controller
     public function home()
     {
         $data['testimonials'] = Testimonial::orderBy('sequence', 'asc')->get();
-        $data['portfolios'] = Portfolio::get();
+        $data['portfolios'] = Portfolio::where('show_in_homepage', 1)->get();
         $data['services'] = Service::get();
         $data['choose'] = Choose::get();
         $data['about'] = AboutUs::first();

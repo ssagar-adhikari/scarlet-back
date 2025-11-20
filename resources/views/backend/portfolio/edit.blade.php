@@ -63,14 +63,26 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                        <label class="form-label">Status</label>
-                        <select name="status" class="form-control" required>
-                            <option value="running" {{ old('status', $portfolio->status) == 'running' ? 'selected' : '' }}>
-                                Running</option>
-                            <option value="completed"
-                                {{ old('status', $portfolio->status) == 'completed' ? 'selected' : '' }}>Completed</option>
-                        </select>
+                            <label class="form-label">Status</label>
+                            <select name="status" class="form-control" required>
+                                <option value="running"
+                                    {{ old('status', $portfolio->status) == 'running' ? 'selected' : '' }}>
+                                    Running</option>
+                                <option value="completed"
+                                    {{ old('status', $portfolio->status) == 'completed' ? 'selected' : '' }}>Completed
+                                </option>
+                            </select>
                         </div>
+                        <div class="form-group mb-3">
+                            <label class="mt-5">
+                                <input type="hidden" name="show_in_homepage" value="0">
+
+                                <input type="checkbox" name="show_in_homepage" value="1"
+                                    {{ old('show_in_homepage', $portfolio->show_in_homepage ?? 0) == 1 ? 'checked' : '' }}>
+                                Show in Homepage
+                            </label>
+                        </div>
+
                     </div>
 
                     <div class="mb-3">

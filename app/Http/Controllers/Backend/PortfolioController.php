@@ -33,6 +33,7 @@ class PortfolioController extends Controller
             'year' => 'nullable|string|max:255',
             'images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:4096',
             'status' => 'required|in:running,completed',
+            'show_in_homepage' => 'sometimes|boolean',
         ]);
 
         $portfolio = Portfolio::create($validated);
@@ -62,6 +63,7 @@ class PortfolioController extends Controller
 
     public function update(Request $request, Portfolio $portfolio)
     {
+        // dd($request->all());
         $validated = $request->validate([
             'title' => 'required|string|max:255' . $portfolio->id,
             'description' => 'nullable|string',
@@ -71,6 +73,7 @@ class PortfolioController extends Controller
             'year' => 'nullable|string|max:255',
             'images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:4096',
             'status' => 'required|in:running,completed',
+            'show_in_homepage' => 'sometimes|boolean',
         ]);
 
         $portfolio->update($validated);
